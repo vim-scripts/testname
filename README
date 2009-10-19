@@ -1,0 +1,42 @@
+This is a mirror of http://www.vim.org/scripts/script.php?script_id=2817
+
+Get an unused file name for testing purpose.
+
+File names are counted A1,A2,..,A9,B10,..,B99,C100,..  Several "sets" can be
+defined.  A set specifies path and extension of the file name to be
+generated.  Files named "lastnr.dat" maintain the counter(s) for each set.
+Select a set with a KEY.  An expr-abbr is a useful way to trigger the
+functions.
+
+Usage: edit a new test file:
+    :new tn#
+
+Customization: variables in the vimrc
+
+g:testname#set    (dictionary)
+
+    :let g:testname#set = {}
+    :let g:testname#set[KEY] = { "ext": EXT, "path": PATH [, "lnk": LNPK] }
+    :...
+    
+    KEY - (string) the selector; for use in the abbreviation, e.g. "vim"
+    EXT - (string) extension for the file name to be generated, e.g. ".vim"
+    PATH - (string) path in which to create the new files and "lastnr.dat"
+        (user creates the files, script only creates lastnr.dat)
+    LNPK - (string) optional selector to choose the path for lastnr.dat from
+        another set; "LastNr.dat Path Key".  Makes it possible to have a
+        single lastnr.dat file for all paths.
+    
+    * You can overwrite the one default KEY "vim".
+    * Different KEYs can share PATH (the lastnr file contains a line for
+      each KEY), only PATH + EXT must be unique (in general).
+
+g:testname#lastnrfile	    (string)
+
+    name of lastnr-file in PATH; must be given without (esp. absolute) path;
+    default is "lastnr.dat"
+
+g:testname#firstnr    (string)
+
+    first "number" to be used, default "A1"
+
